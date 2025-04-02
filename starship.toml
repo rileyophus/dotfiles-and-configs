@@ -1,3 +1,5 @@
+# nerd font required to view symbols
+
 add_newline = false
 
 format = '$time $all'

@@ -1,0 +1,23 @@
+{
+    "workbench.colorTheme": "SuperGreatMonokai",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'monospace', monospace",
+    "editor.fontLigatures": true,
+    "editor.indentSize": "tabSize",
+    "editor.detectIndentation": false,
+    "[html]": {
+        "editor.tabSize": 2,
+    },
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 120,
+    "editor.renderWhitespace": "all",
+    "code-runner.runInTerminal": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8",
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "editor.fontSize": 13,
+}

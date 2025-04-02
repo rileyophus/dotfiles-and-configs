@@ -9,6 +9,17 @@ include "%L"   # Default Compose file
 <Multi_key> <asterisk> <asterisk> <asterisk> : "⁂"
 <Multi_key> <d> <a> <g> : "†"
 
+# Diacritics
+<Multi_key> <period> <comma> : "̧"
+<Multi_key> <comma> <period> : "̨"
+
+<Multi_key> <asciicircum> <d> : "̇"          # combining dot
+<Multi_key> <asciicircum> <apostrophe> : "́" # combining acute
+<Multi_key> <asciicircum> <grave> : "̀"      # combining grave
+<Multi_key> <asciicircum> <underscore> : "̅" # combining macron
+<Multi_key> <underscore> <period> : "̈"      # combining dieresis
+<Multi_key> <asciicircum> <c> : "̂"          # combining circumflex
+
 
 # Blackboard bold
 <Multi_key> <b> <b> <a> : "𝕒"
@@ -333,15 +344,5 @@ include "%L"   # Default Compose file
 <Multi_key> <o> <p> <t> : "⌥"
 <Multi_key> <r> <e> <c> <t> : "▮"
 
-
-<Multi_key> <period> <comma> : "̧"
-<Multi_key> <comma> <period> : "̨"
-
-<Multi_key> <asciicircum> <d> : "̇" 			# combining dot
-<Multi_key> <asciicircum> <apostrophe> : "́" # combining acute
-<Multi_key> <asciicircum> <grave> : "̀" 		# combining grave
-<Multi_key> <asciicircum> <underscore> : "̅" # combining macron
-<Multi_key> <underscore> <period> : "̈"		# combining dieresis
-<Multi_key> <asciicircum> <c> : "̂" 			# combining circumflex
 
 

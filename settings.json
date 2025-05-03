@@ -1,3 +1,5 @@
+// VSCode settings
+
 {
     "workbench.colorTheme": "SuperGreatMonokai",
     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'monospace', monospace",

@@ -140,11 +140,14 @@ include "%L"   # Default Compose file
 
 # Math
 <Multi_key> <i> <n> <t> : "∫"
+<Multi_key> <l> <i> <n> <t> : "∮"
+<Multi_key> <s> <i> <n> <t> : "∯"
+<Multi_key> <3> <i> <n> <t> : "∭"
 <Multi_key> <s> <u> <m> : "∑"
 <Multi_key> <p> <r> <o> <d> : "∏"
 
-<Multi_key> <p> <apostrophe> : "′"
-<Multi_key> <p> <apostrophe> <apostrophe> : "″"
+<Multi_key> <p> <apostrophe> <space> : "′"
+<Multi_key> <p> <apostrophe> <apostrophe> <space> : "″"
 <Multi_key> <p> <apostrophe> <apostrophe> <apostrophe> : "‴"
 <Multi_key> <s> <q> : "√"
 <Multi_key> <c> <b> <r> <t> : "∛"
@@ -154,7 +157,7 @@ include "%L"   # Default Compose file
 <Multi_key> <m> <o> : "∘"
 <Multi_key> <p> <m> : "±"
 <Multi_key> <m> <p> : "∓"
-<Multi_key> <d> <e> <l> : "∇"
+<Multi_key> <d> <e> <l> <space> : "∇"
 <Multi_key> <slash> <slash> : "⁄"
 
 <Multi_key> <b> <r> <a> : "⟨"
@@ -172,7 +175,7 @@ include "%L"   # Default Compose file
 <Multi_key> <s> <u> <c> <c> : "≻"
 
 <Multi_key> <l> <l> : "≪"
-<Multi_key> <g> <g> <g> : "≫"
+<Multi_key> <g> <greater> : "≫"
 
 
 # Arrows

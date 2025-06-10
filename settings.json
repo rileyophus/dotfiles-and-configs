@@ -1,7 +1,6 @@
 // VSCode settings
 
 {
-    "workbench.colorTheme": "SuperGreatMonokai",
     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'monospace', monospace",
     "editor.fontLigatures": true,
     "editor.indentSize": "tabSize",
@@ -9,8 +8,12 @@
     "[html]": {
         "editor.tabSize": 2,
     },
+    "[asm-intel-x86-generic]": {
+        "editor.tabSize": 8,
+    },
     "editor.rulers": [
         80,
+        100,
         120
     ],
     "editor.wordWrap": "bounded",
@@ -20,6 +23,16 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8",
     },
-    "python.analysis.typeCheckingMode": "basic",
     "editor.fontSize": 13,
+    "python.analysis.typeCheckingMode": "off",
+    "window.titleBarStyle": "native",
+    "clangd.path": "/home/riley/.config/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/19.1.2/clangd_19.1.2/bin/clangd",
+    "[zig]": {
+        "editor.formatOnSave": false,
+    },
+    "zig.zls.enabled": "on",
+    "zig.zls.inlayHintsShowParameterName": false,
+    "zig.zls.inlayHintsShowVariableTypeHints": false,
+    "editor.inlayHints.enabled": "off",
+    "workbench.colorTheme": "Catppuccin Mocha",
 }

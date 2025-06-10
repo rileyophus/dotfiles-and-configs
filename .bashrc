@@ -28,8 +28,6 @@ alias df='df -h'
 alias grep='grep -i'
 
 alias fseal='flatpak run com.github.tchx84.Flatseal'
-alias subl='flatpak run com.sublimetext.three'
-alias zen='flatpak run app.zen_browser.zen'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias .3='cd ../../..'
@@ -40,3 +38,4 @@ unset rc
 
 
 eval "$(starship init bash)"
+. "$HOME/.cargo/env"

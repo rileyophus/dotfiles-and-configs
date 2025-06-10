@@ -201,7 +201,7 @@ include "%L"   # Default Compose file
 <Multi_key> <b> <c> <u> <p> : "⋃"
 <Multi_key> <c> <a> <p> : "∩"
 <Multi_key> <c> <u> <p> : "∪"
-<Multi_key> <i> <n> : "∈"
+<Multi_key> <m> <i> <n> : "∈"
 <Multi_key> <n> <i> <n> : "∉"
 <Multi_key> <i> <n> <c> <l> : "⊂"
 

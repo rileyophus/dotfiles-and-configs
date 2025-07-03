@@ -10,19 +10,69 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-bindkey  "^[[H"       beginning-of-line
-bindkey  "^[[F"       end-of-line
-bindkey  "^[[3~"      delete-char
-bindkey  "^[[3;5~"    kill-word
-bindkey  "^H"         backward-kill-word
-bindkey  "^[[1;5C"    forward-word
-bindkey  "^[[1;5D"    backward-word
-
-alias df='df -h'
-alias grep='grep -i'
-alias history='history 1'
-
-alias ..='cd ..'
-alias ...='cd ../..'
+bindkey  "^[[H"     beginning-of-line
+bindkey  "^[[F"     end-of-line
+bindkey  "^[[3~"    delete-char
+bindkey  "^[[3;5~"  kill-word
+bindkey  "^[[3;6~"  kill-line
+bindkey  "^H"       backward-kill-word
+bindkey  "^[[1;5C"  forward-word
+bindkey  "^[[1;5D"  backward-word
 
 eval "$(starship init zsh)"
+
+source "$HOME/gitrepos/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOME/gitrepos/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+#-------------------------------------
+# setup for FISH-like abbreviations, based on https://dev.to/frost/fish-style-abbreviations-in-zsh-40aa
+#-------------------------------------
+
+# declare a list of expandable abbreviations to fill up later
+typeset -a abbreviations
+abbreviations=()
+
+# adds an abbreviation/alias to the list
+function abbr() {
+    alias $1
+    abbreviations+=(${1%%\=*})  # %%\=* removes the equals sign and everything after it
+}
+
+# expand any abbreviation in the current line buffer
+function expand-abbreviations() {
+    for abbr in $abbreviations; do
+    # remove the right side of the conditional if you only want to expand at the beginning of the line
+        if [[ $LBUFFER == "$abbr" || $LBUFFER == *" $abbr" ]]; then
+            local before=${LBUFFER%$abbr}
+            local after=${aliases[$abbr]}  # this is where the actual substitution is done
+            LBUFFER="${before}${after}"
+            break
+        fi
+    done
+    zle magic-space
+}
+zle -N expand-abbreviations
+
+# Bind the space key to expand-abbreviations()
+bindkey ' '             expand-abbreviations
+bindkey '^ '            magic-space  # control-space to bypass completion
+bindkey -M isearch " "  magic-space  # normal space during searches
+
+# Expands any abbreviations before accepting the line as is and executing the entered command
+expand-abbrs-and-accept-line() {
+    expand-abbreviations
+    zle .backward-delete-char
+    zle .accept-line
+}
+zle -N accept-line expand-abbrs-and-accept-line
+
+#-------------------------------------
+# end of abbreviation setup
+#-------------------------------------
+
+abbr df='df -h'
+abbr grep='grep -i'
+abbr mkdir='mkdir -p'
+abbr history='history 1'
+abbr ..='cd ..'
+abbr ...='cd ../..'

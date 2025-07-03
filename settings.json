@@ -35,4 +35,6 @@
     "zig.zls.inlayHintsShowVariableTypeHints": false,
     "editor.inlayHints.enabled": "off",
     "workbench.colorTheme": "Catppuccin Mocha",
+    "editor.minimap.enabled": false,
+    "git.openRepositoryInParentFolders": "never",
 }

@@ -25,26 +25,28 @@ source "$HOME/gitrepos/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 source "$HOME/gitrepos/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 #-------------------------------------
-# setup for FISH-like abbreviations, based on https://dev.to/frost/fish-style-abbreviations-in-zsh-40aa
+# setup for FISH-like abbreviations
+# based on https://dev.to/frost/fish-style-abbreviations-in-zsh-40aa
 #-------------------------------------
 
 # declare a list of expandable abbreviations to fill up later
-typeset -a abbreviations
-abbreviations=()
+typeset -A abbrs
+abbrs=()
 
 # adds an abbreviation/alias to the list
 function abbr() {
-    alias $1
-    abbreviations+=(${1%%\=*})  # %%\=* removes the equals sign and everything after it
+    local key="${1%%\=*}"  # %%\=* removes the equals sign and everything after it
+    local val="${1#*\=}"
+    abbrs[$key]="$val"
 }
 
 # expand any abbreviation in the current line buffer
 function expand-abbreviations() {
-    for abbr in $abbreviations; do
+    for key in "${(@k)abbrs}"; do
     # remove the right side of the conditional if you only want to expand at the beginning of the line
-        if [[ $LBUFFER == "$abbr" || $LBUFFER == *" $abbr" ]]; then
-            local before=${LBUFFER%$abbr}
-            local after=${aliases[$abbr]}  # this is where the actual substitution is done
+        if [[ $LBUFFER == "$key" || $LBUFFER == *" $key" ]]; then
+            local before=${LBUFFER%$key}
+            local after="${abbrs[$key]}"  # this is where the actual substitution is done
             LBUFFER="${before}${after}"
             break
         fi
@@ -76,3 +78,4 @@ abbr mkdir='mkdir -p'
 abbr history='history 1'
 abbr ..='cd ..'
 abbr ...='cd ../..'
+abbr nv='nvim'

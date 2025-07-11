@@ -9,6 +9,7 @@ zstyle :compinstall filename '/home/riley/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+export EDITOR="/usr/bin/nvim"
 
 bindkey  "^[[H"     beginning-of-line
 bindkey  "^[[F"     end-of-line
@@ -33,7 +34,7 @@ source "$HOME/gitrepos/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 typeset -A abbrs
 abbrs=()
 
-# adds an abbreviation/alias to the list
+# adds an abbreviation to the list
 function abbr() {
     local key="${1%%\=*}"  # %%\=* removes the equals sign and everything after it
     local val="${1#*\=}"
@@ -79,3 +80,4 @@ abbr history='history 1'
 abbr ..='cd ..'
 abbr ...='cd ../..'
 abbr nv='nvim'
+abbr lsa='ls -a'

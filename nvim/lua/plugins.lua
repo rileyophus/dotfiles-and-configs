@@ -13,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { -- Catppuccin
+    {
         "catppuccin/nvim",
         name = "catppuccin",
         priority = 1000,
@@ -23,7 +23,7 @@ require("lazy").setup({
         end,
     },
 
-    { -- Indent Blankline
+    {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         opts = {
@@ -31,13 +31,20 @@ require("lazy").setup({
         },
     },
 
-    { -- Telescope
+    {
+        "echasnovski/mini.nvim", version = false,
+        config = function() require("plugins.mini")() end,
+    },
+
+    { "lambdalisue/suda.vim" },
+
+    {
         "nvim-telescope/telescope.nvim", branch = "0.1.x",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function() require("telescope").setup({}) end,
     },
 
-    { -- TreeSJ
+    {
         "Wansmer/treesj",
         cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
         opts = { use_default_keymaps = false },

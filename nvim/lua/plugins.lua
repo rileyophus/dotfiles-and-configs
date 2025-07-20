@@ -45,6 +45,14 @@ require("lazy").setup({
     },
 
     {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
+        build = ":TSUpdate",
+        config = function() require("plugins.treesitter")() end,
+    },
+
+    {
         "Wansmer/treesj",
         cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
         opts = { use_default_keymaps = false },

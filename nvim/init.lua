@@ -30,7 +30,7 @@ vim.opt.splitright = true
 -- Display invisible characters
 vim.opt.list = true
 vim.opt.listchars = {
-    tab = "→ ",
+    tab = "⇥ ",
     trail = "·",
     multispace = "·",
     nbsp = "␣",

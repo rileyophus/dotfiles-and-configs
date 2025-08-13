@@ -88,3 +88,6 @@ abbr trash='mv  ~/.local/share/Trash/files'
 abbr uname='uname -norvm'
 abbr ..='cd ..'
 abbr ...='cd ../..'
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

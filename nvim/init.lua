@@ -35,12 +35,20 @@ vim.api.nvim_create_augroup("remember_folds", { clear = true })
 vim.api.nvim_create_autocmd("BufWinLeave", {
     group = "remember_folds",
     pattern = "*",
-    command = "mkview",
+    callback = function()
+        if vim.bo.buftype == "" and vim.fn.bufname("%") ~= "" then
+            vim.cmd("mkview")
+        end
+    end,
 })
 vim.api.nvim_create_autocmd("BufWinEnter", {
     group = "remember_folds",
     pattern = "*",
-    command = "silent! loadview",
+    callback = function()
+        if vim.bo.buftype == "" and vim.fn.bufname("%") ~= "" then
+            vim.cmd("silent! loadview")
+        end
+    end,
 })
 
 -- Display invisible characters

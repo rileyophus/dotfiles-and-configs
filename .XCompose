@@ -150,7 +150,9 @@ include "%L"   # Default Compose file
 <Multi_key> <p> <apostrophe> <apostrophe> <space> : "″"
 <Multi_key> <p> <apostrophe> <apostrophe> <apostrophe> : "‴"
 <Multi_key> <s> <q> : "√"
+<Multi_key> <r> <t> : "√"
 <Multi_key> <c> <b> <r> <t> : "∛"
+<Multi_key> <3> <r> <t> : "∛"
 <Multi_key> <i> <n> <f> : "∞"
 <Multi_key> <p> <i> : "π"
 <Multi_key> <p> <d> : "∂"
@@ -185,11 +187,17 @@ include "%L"   # Default Compose file
 <Multi_key> <m> <a> <p> : "↦"
 <Multi_key> <h> <a> <r> <p> : "⇀"
 
+# Triangles
+<Multi_key> <bar> <greater> : "▷"
+<Multi_key> <greater> <bar> : "◁"
+<Multi_key> <underscore> <V> : "▽"
+
 # Logic
 <Multi_key> <a> <s> <s> <e> <r> <t> : "⊢"
 <Multi_key> <bar> <minus> : "⊢"
 <Multi_key> <minus> <bar> : "⊣"
 <Multi_key> <e> <x> <i> <s> <t> : "∃"
+<Multi_key> <a> <l> <l> : "∀"
 <Multi_key> <a> <n> <y> : "∀"
 <Multi_key> <n> <e> <g> : "⌐"
 <Multi_key> <q> <e> <d> : "▮"
@@ -217,8 +225,6 @@ include "%L"   # Default Compose file
 <Multi_key> <c> <c> : "⊚"
 <Multi_key> <c> <asterisk> : "⊛"
 <Multi_key> <c> <equal> : "⊜"
-
-<Multi_key> <bar> <greater> : "⊳"
 
 # Superscript
 <Multi_key> <asciicircum> <asciicircum> <A> : "ᴬ"
@@ -331,7 +337,6 @@ include "%L"   # Default Compose file
 <Multi_key> <N> <l> : "И"
 
 <Multi_key> <c> <f> : "😭"
-<Multi_key> <s> <k> : "💀"
 
 <Multi_key> <colon> <colon> : "⁘"
 <Multi_key> <bar> <bar> : "¦"

@@ -10,6 +10,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 export EDITOR="/usr/bin/nvim"
+bindkey -v
 
 bindkey  "^[[H"     beginning-of-line
 bindkey  "^[[F"     end-of-line
@@ -73,12 +74,17 @@ zle -N accept-line expand-abbrs-and-accept-line
 # end of abbreviation setup
 #-------------------------------------
 
+alias eza='eza --icons'
+
 abbr df='df -h'
+abbr ezaa='eza -a'
 abbr grep='grep -i'
+abbr hist='fc -l'
+abbr history='fc -l'
+abbr lsa='ls -a'
 abbr mkdir='mkdir -p'
-abbr history='history 1'
+abbr nv='nvim'
+abbr trash='mv  ~/.local/share/Trash/files'
+abbr uname='uname -norvm'
 abbr ..='cd ..'
 abbr ...='cd ../..'
-abbr nv='nvim'
-abbr lsa='ls -a'
-abbr uname='uname -norvm'

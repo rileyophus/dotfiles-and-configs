@@ -38,6 +38,7 @@ return function()
     require("mini.comment").setup()
     require("mini.files").setup()
     require("mini.surround").setup()
+    require("mini.statusline").setup()
     starter.setup({
         header = header,
         items = items,
@@ -45,6 +46,7 @@ return function()
             "Move current item          <A-j/k>",
             "Open file explorer         <leader>fe",
             "Find file                  <leader>ff",
+            "Live grep                  <leader>lg",
             "Find string                <leader>fs",
             "Close this buffer          <C-c>"
         }, "\n\n"),

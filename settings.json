@@ -26,7 +26,7 @@
     "editor.fontSize": 13,
     "python.analysis.typeCheckingMode": "off",
     "window.titleBarStyle": "native",
-    "clangd.path": "/home/riley/.config/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/19.1.2/clangd_19.1.2/bin/clangd",
+    "clangd.path": "$HOME/.config/VSCodium/User/globalStorage/llvm-vs-code-extensions.vscode-clangd/install/19.1.2/clangd_19.1.2/bin/clangd",
     "[zig]": {
         "editor.formatOnSave": false,
     },
@@ -38,3 +38,4 @@
     "editor.minimap.enabled": false,
     "git.openRepositoryInParentFolders": "never",
 }
+

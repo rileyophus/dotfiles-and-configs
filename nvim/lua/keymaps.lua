@@ -83,7 +83,7 @@ vim.keymap.set("n", "<leader>fe", "<CMD>lua MiniFiles.open()<CR>", { desc = "Fil
 -- Telescope
 local telescope_builtin = require("telescope.builtin")
 vim.keymap.set(
-    "n", "<leader>lg", function() telescope_builtin.live_grep() end,
+    "n", "<leader>g", function() telescope_builtin.live_grep() end,
     { desc = "Live grep" }
 )
 vim.keymap.set(

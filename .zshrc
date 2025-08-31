@@ -9,17 +9,29 @@ zstyle :compinstall filename '/home/riley/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-export EDITOR="/usr/bin/nvim"
-bindkey -v
 
-bindkey  "^[[H"     beginning-of-line
-bindkey  "^[[F"     end-of-line
-bindkey  "^[[3~"    delete-char
-bindkey  "^[[3;5~"  kill-word
-bindkey  "^[[3;6~"  kill-line
-bindkey  "^H"       backward-kill-word
-bindkey  "^[[1;5C"  forward-word
-bindkey  "^[[1;5D"  backward-word
+export EDITOR=nvim
+export VISUAL=nvim
+
+bindkey "^[[H"    beginning-of-line
+bindkey "^[[F"    end-of-line
+bindkey "^[[3~"   delete-char
+bindkey "^[[3;5~" kill-word
+bindkey "^[[3;6~" kill-line
+bindkey "^H"      backward-kill-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# should be the default, but setting this again fixes a bug when exiting vi mode
+bindkey "^?" backward-delete-char
+
+# autocomplete from history
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
 eval "$(starship init zsh)"
 
@@ -37,38 +49,32 @@ abbrs=()
 
 # adds an abbreviation to the list
 function abbr() {
-    local key="${1%%\=*}"  # %%\=* removes the equals sign and everything after it
-    local val="${1#*\=}"
+    local key="${1%%\=*}"  # '%%\=*' removes the equals sign and everything after it
+    local val="${1#*\=}"  # '#*\=' removes the equals sign and everything before it
     abbrs[$key]="$val"
 }
 
 # expand any abbreviation in the current line buffer
 function expand-abbreviations() {
     for key in "${(@k)abbrs}"; do
-    # remove the right side of the conditional if you only want to expand at the beginning of the line
-        if [[ $LBUFFER == "$key" || $LBUFFER == *" $key" ]]; then
-            local before=${LBUFFER%$key}
-            local after="${abbrs[$key]}"  # this is where the actual substitution is done
-            LBUFFER="${before}${after}"
-            break
-        fi
+        [[ "$LBUFFER" != "$key" && "$LBUFFER" != *" $key" ]] && continue
+
+        local before="${LBUFFER%$key}"
+        local after="${abbrs[$key]}"  # this is where the actual substitution is done
+        LBUFFER="${before}${after}"
+        break
     done
     zle magic-space
 }
+# make the function into a widget so bindkey can use it
 zle -N expand-abbreviations
 
-# Bind the space key to expand-abbreviations()
-bindkey ' '             expand-abbreviations
-bindkey '^ '            magic-space  # control-space to bypass completion
-bindkey -M isearch " "  magic-space  # normal space during searches
+# bind the space key to expand-abbreviations(), unless during a search
+bindkey ' '            expand-abbreviations
+bindkey -M isearch ' ' magic-space
 
-# Expands any abbreviations before accepting the line as is and executing the entered command
-expand-abbrs-and-accept-line() {
-    expand-abbreviations
-    zle .backward-delete-char
-    zle .accept-line
-}
-zle -N accept-line expand-abbrs-and-accept-line
+# control-space to bypass completion
+bindkey '^ ' magic-space
 
 #-------------------------------------
 # end of abbreviation setup
@@ -84,7 +90,7 @@ abbr history='fc -l'
 abbr lsa='ls -a'
 abbr mkdir='mkdir -p'
 abbr nv='nvim'
-abbr uname='uname -norvm'
+abbr uname='uname -nor'
 abbr ..='cd ..'
 abbr ...='cd ../..'
 

@@ -1,5 +1,5 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 # End of lines configured by zsh-newuser-install
@@ -47,7 +47,7 @@ source "$HOME/gitrepos/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 typeset -A abbrs
 abbrs=()
 
-# adds an abbreviation to the list
+# add an abbreviation to the list
 function abbr() {
     local key="${1%%\=*}"  # '%%\=*' removes the equals sign and everything after it
     local val="${1#*\=}"  # '#*\=' removes the equals sign and everything before it
@@ -57,6 +57,7 @@ function abbr() {
 # expand any abbreviation in the current line buffer
 function expand-abbreviations() {
     for key in "${(@k)abbrs}"; do
+        # LBUFFER is "left buffer" not "line buffer"
         [[ "$LBUFFER" != "$key" && "$LBUFFER" != *" $key" ]] && continue
 
         local before="${LBUFFER%$key}"
@@ -90,6 +91,7 @@ abbr history='fc -l'
 abbr lsa='ls -a'
 abbr mkdir='mkdir -p'
 abbr nv='nvim'
+abbr sudo='doas'
 abbr uname='uname -nor'
 abbr ..='cd ..'
 abbr ...='cd ../..'

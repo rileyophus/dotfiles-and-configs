@@ -74,7 +74,7 @@ zle -N expand-abbreviations
 bindkey ' '            expand-abbreviations
 bindkey -M isearch ' ' magic-space
 
-# control-space to bypass completion
+# ctrl+space to bypass completion
 bindkey '^ ' magic-space
 
 #-------------------------------------
@@ -83,6 +83,7 @@ bindkey '^ ' magic-space
 
 alias eza='eza --icons'
 
+abbr rm='rm -i'
 abbr df='df -h'
 abbr ezaa='eza -a'
 abbr grep='grep -i'
@@ -93,6 +94,7 @@ abbr mkdir='mkdir -p'
 abbr nv='nvim'
 abbr sudo='doas'
 abbr uname='uname -nor'
+abbr zcc='zig cc -Wall -Wextra'
 abbr ..='cd ..'
 abbr ...='cd ../..'
 

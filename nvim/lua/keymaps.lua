@@ -71,8 +71,6 @@ vim.keymap.set(
 
 -- Plugins --
 
-vim.keymap.set("c", "SW", "<CMD>SudaWrite<CR>",        { desc = "Write to readonly file" })
-
 vim.keymap.set("n", "<leader>j", "<CMD>TSJToggle<CR>", { desc = "Toggle Treesitter join" })
 
 -- Mini.nvim

@@ -24,6 +24,13 @@ require("lazy").setup({
     },
 
     {
+        "chomosuke/typst-preview.nvim",
+        lazy = false,
+        version = '1.*',
+        opts = {},
+    },
+
+    {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         opts = {
@@ -35,8 +42,6 @@ require("lazy").setup({
         "echasnovski/mini.nvim", version = false,
         config = function() require("plugins.mini")() end,
     },
-
-    { "lambdalisue/suda.vim" },
 
     {
         "nvim-telescope/telescope.nvim", branch = "0.1.x",

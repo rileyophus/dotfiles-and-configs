@@ -9,7 +9,6 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 5
 vim.opt.colorcolumn = { 81, 101 }
 
-
 -- Indentation
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

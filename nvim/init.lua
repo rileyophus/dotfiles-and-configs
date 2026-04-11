@@ -2,6 +2,9 @@ require("plugins")
 require("keymaps")
 vim.cmd("syntax enable")
 
+-- Necessary for the flatpak version
+vim.env.PATH = vim.env.PATH .. ":/run/host/usr/bin"
+
 -- UI
 vim.opt.number = true
 vim.opt.termguicolors = true
@@ -19,6 +22,7 @@ vim.opt.smartindent = true
 vim.opt.iskeyword:append("-") -- treat dash as part of word
 vim.opt.path:append("**") -- include subdirectories in search
 vim.opt.clipboard:append("unnamedplus") -- use system clipboard
+vim.opt.shellcmdflag = "-c"
 vim.opt.encoding = "UTF-8"
 vim.opt.updatetime = 300
 vim.opt.undofile = true
@@ -48,6 +52,11 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
             vim.cmd("silent! loadview")
         end
     end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "c", "cpp", "java", "typst", "zig", },
+    callback = function() vim.treesitter.start() end,
 })
 
 -- Display invisible characters

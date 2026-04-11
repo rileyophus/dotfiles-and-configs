@@ -3,10 +3,13 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<ESC>", "<CMD>noh<CR>", { desc = "Remove highlight" })
 
 -- Delete, copy, cut, & paste
-vim.keymap.set({"n", "x"} , "x", '"_x', { noremap = true,   desc = "Delete without copy" })
-vim.keymap.set("n", "<leader>p", '"0p', { noremap = true,   desc = "Paste from last yank" })
-vim.keymap.set("i", "<C-Del>", "<C-o>de", { noremap = true, desc = "Delete word" })
-vim.keymap.set("i", "<C-H>", "<C-w>", { noremap = true,     desc = "Backspace word" })
+vim.keymap.set({ "n", "x", } , "x", '"_x', { noremap = true,   desc = "Delete without copy", })
+vim.keymap.set("n", "<leader>p", '"0p', { noremap = true,      desc = "Paste from last yank", })
+vim.keymap.set("i", "<C-Del>", "<C-o>de", { noremap = true,    desc = "Delete word", })
+
+    -- Need both of these for terminal cross-compatibility
+vim.keymap.set("i", "<C-BS>", "<C-w>", { noremap = true,       desc = "Backspace word", })
+vim.keymap.set("i", "<C-H>", "<C-w>", { noremap = true,        desc = "Backspace word", })
 
 -- Buffers
 vim.keymap.set("n", "<leader>l", "<CMD>bn<CR>",       { desc = "Next buffer" })
@@ -30,16 +33,16 @@ vim.keymap.set("n", "<C-Right>", "<CMD>vert res +2<CR>", { desc = "Increase wind
 vim.keymap.set("n", "<C-Left>", "<CMD>vert res -2<CR>",  { desc = "Decrease window width" })
 
 -- Window switching
-vim.keymap.set({"n", "t"}, "<C-j>", "<CMD>winc j<CR>", { desc = "Switch to window below" })
-vim.keymap.set({"n", "t"}, "<C-k>", "<CMD>winc k<CR>", { desc = "Switch to window above" })
-vim.keymap.set({"n", "t"}, "<C-h>", "<CMD>winc h<CR>", { desc = "Switch to window left" })
-vim.keymap.set({"n", "t"}, "<C-l>", "<CMD>winc l<CR>", { desc = "Switch to window right" })
+vim.keymap.set({ "n", "t", }, "<C-j>", "<CMD>winc j<CR>", { desc = "Switch to window below" })
+vim.keymap.set({ "n", "t", }, "<C-k>", "<CMD>winc k<CR>", { desc = "Switch to window above" })
+vim.keymap.set({ "n", "t", }, "<C-h>", "<CMD>winc h<CR>", { desc = "Switch to window left" })
+vim.keymap.set({ "n", "t", }, "<C-l>", "<CMD>winc l<CR>", { desc = "Switch to window right" })
 
 -- Insert mode movement
-vim.keymap.set("i", "<A-j>", "<Down>", { noremap = true,  desc = "Move down" })
-vim.keymap.set("i", "<A-k>", "<Up>", { noremap = true,    desc = "Move up" })
-vim.keymap.set("i", "<A-h>", "<Left>", { noremap = true,  desc = "Move left" })
-vim.keymap.set("i", "<A-l>", "<Right>", { noremap = true, desc = "Move right" })
+vim.keymap.set("i", "<A-j>", "<Down>", { noremap = true,  desc = "Move down", })
+vim.keymap.set("i", "<A-k>", "<Up>", { noremap = true,    desc = "Move up", })
+vim.keymap.set("i", "<A-h>", "<Left>", { noremap = true,  desc = "Move left", })
+vim.keymap.set("i", "<A-l>", "<Right>", { noremap = true, desc = "Move right", })
 
 -- Move lines
 vim.keymap.set(
@@ -74,7 +77,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>j", "<CMD>TSJToggle<CR>", { desc = "Toggle Treesitter join" })
 
 -- Mini.nvim
-vim.keymap.set("n", "<leader>/", "gcc", { remap = true,              desc = "Toggle line comment" })
+vim.keymap.set("n", "<leader>/", "gcc", { remap = true,              desc = "Toggle line comment", })
 vim.keymap.set("v", "<leader>/", "<ESC><CMD>norm gvgc<CR>",        { desc = "Toggle block comment" })
 vim.keymap.set("n", "<leader>fe", "<CMD>lua MiniFiles.open()<CR>", { desc = "File explorer" })
 

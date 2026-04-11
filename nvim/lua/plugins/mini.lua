@@ -9,7 +9,7 @@ local header = [[
 local red = "#f38ba8"
 vim.api.nvim_set_hl(0, "MiniStarterHeader", { fg = red })
 local blue = "#89b4fa"
-vim.api.nvim_set_hl(0, "MiniStarterFooter", { fg = blue, italic = true })
+vim.api.nvim_set_hl(0, "MiniStarterFooter", { fg = blue, italic = true, })
 
 local starter = require("mini.starter")
 local items = {
@@ -39,7 +39,7 @@ return function()
     require("mini.files").setup()
     require("mini.surround").setup()
     require("mini.statusline").setup()
-    starter.setup({
+    starter.setup {
         header = header,
         items = items,
         footer = table.concat({
@@ -50,7 +50,5 @@ return function()
             "Find string                <leader>fs",
             "Close this buffer          <C-c>"
         }, "\n\n"),
-    })
+    }
 end
-
-

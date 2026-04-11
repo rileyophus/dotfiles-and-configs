@@ -49,7 +49,7 @@ abbrs=()
 
 # add an abbreviation to the list
 function abbr() {
-    local key="${1%%\=*}"  # '%%\=*' removes the equals sign and everything after it
+    local key="${1%%\=*}" # '%%\=*' removes the equals sign and everything after it
     local val="${1#*\=}"  # '#*\=' removes the equals sign and everything before it
     abbrs[$key]="$val"
 }
@@ -81,11 +81,26 @@ bindkey '^ ' magic-space
 # end of abbreviation setup
 #-------------------------------------
 
-alias eza='eza --icons'
+function zcc () {
+    zig cc -std=c99 \
+    -Wall -Wextra -Wpedantic -Wno-char-subscripts -fno-digraphs \
+    "$@"
+}
+function zcpp () {
+    zig cc -std=c++23 \
+    -Wall -Wextra -Wpedantic -Wno-char-subscripts -fno-digraphs \
+    "$@"
+}
+function gccw () { gcc -std=c99 -Wall -Wextra -Wpedantic -Wno-char-subscripts "$@"; }
+function gcpp () { gcc -std=++23 -Wall -Wextra -Wpedantic -Wno-char-subscripts "$@"; }
 
-abbr rm='rm -i'
+alias eza='eza --icons'
+alias nvim='flatpak run --filesystem=host io.neovim.nvim'
+
+abbr mv='mv -i'
 abbr df='df -h'
 abbr ezaa='eza -a'
+abbr ezal='eza -l'
 abbr grep='grep -i'
 abbr hist='fc -l'
 abbr history='fc -l'
@@ -94,9 +109,14 @@ abbr mkdir='mkdir -p'
 abbr nv='nvim'
 abbr sudo='doas'
 abbr uname='uname -nor'
-abbr zcc='zig cc -Wall -Wextra'
 abbr ..='cd ..'
 abbr ...='cd ../..'
+
+# usage: runc <file.c> <compiler> <flags>
+function runc () {
+    local file="${1%.*}"
+    "${@:2}" "$1" -o "$file" && ./"$file"
+}
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

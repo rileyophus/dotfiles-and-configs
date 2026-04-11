@@ -1,6 +1,7 @@
 require("plugins")
 require("keymaps")
 vim.cmd("syntax enable")
+vim.env.CC = "gcc"
 
 -- Necessary for the flatpak version
 vim.env.PATH = vim.env.PATH .. ":/run/host/usr/bin"

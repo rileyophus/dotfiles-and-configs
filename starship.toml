@@ -22,7 +22,7 @@ format = '[ $duration ]($style)'
 
 [status]
 disabled = false
-format = '[\[$status\] ]($style)'
+format = '[$status ]($style)'
 
 [aws]
 symbol = '  '

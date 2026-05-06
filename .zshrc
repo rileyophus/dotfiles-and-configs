@@ -10,8 +10,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR='flatpak run --filesystem=host io.neovim.nvim'
+export VISUAL="$EDITOR"
 
 bindkey "^[[H"    beginning-of-line
 bindkey "^[[F"    end-of-line
@@ -81,18 +81,22 @@ bindkey '^ ' magic-space
 # end of abbreviation setup
 #-------------------------------------
 
-function zcc () {
+function zcc() {
     zig cc -std=c99 \
     -Wall -Wextra -Wpedantic -Wno-char-subscripts -fno-digraphs \
     "$@"
 }
-function zcpp () {
-    zig cc -std=c++23 \
-    -Wall -Wextra -Wpedantic -Wno-char-subscripts -fno-digraphs \
+function zcpp() {
+    zig c++ -std=c++23 \
+    -Wall -Wextra -Wpedantic -Wno-char-subscripts -Wold-style-cast -fno-digraphs \
     "$@"
 }
-function gccw () { gcc -std=c99 -Wall -Wextra -Wpedantic -Wno-char-subscripts "$@"; }
-function gcpp () { gcc -std=++23 -Wall -Wextra -Wpedantic -Wno-char-subscripts "$@"; }
+function gccw() { gcc -std=c99 -Wall -Wextra -Wpedantic -Wno-char-subscripts "$@"; }
+function gcpp() {
+    g++ -std=c++23 \
+    -Wall -Wextra -Wpedantic -Wold-style-cast -Wno-char-subscripts \
+    "$@";
+}
 
 alias eza='eza --icons'
 alias nvim='flatpak run --filesystem=host io.neovim.nvim'

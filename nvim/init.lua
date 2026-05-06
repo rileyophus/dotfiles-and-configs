@@ -1,10 +1,10 @@
-require("plugins")
+-- Necessary for the flatpak version
+vim.env.PATH = vim.env.PATH .. ":/run/host/usr/bin"
+
+require("vim-pack")
 require("keymaps")
 vim.cmd("syntax enable")
 vim.env.CC = "gcc"
-
--- Necessary for the flatpak version
-vim.env.PATH = vim.env.PATH .. ":/run/host/usr/bin"
 
 -- UI
 vim.opt.number = true
@@ -19,8 +19,15 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
+vim.api.nvim_create_augroup("set_indent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "set_indent",
+    pattern = { "html", "css", "typst", },
+    command = "setlocal tabstop=2 shiftwidth=2",
+})
+
 -- Behavior settings
-vim.opt.iskeyword:append("-") -- treat dash as part of word
+vim.opt.iskeyword:append("-") -- treat hyphen as part of word
 vim.opt.path:append("**") -- include subdirectories in search
 vim.opt.clipboard:append("unnamedplus") -- use system clipboard
 vim.opt.shellcmdflag = "-c"
@@ -53,11 +60,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
             vim.cmd("silent! loadview")
         end
     end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp", "java", "typst", "zig", },
-    callback = function() vim.treesitter.start() end,
 })
 
 -- Display invisible characters

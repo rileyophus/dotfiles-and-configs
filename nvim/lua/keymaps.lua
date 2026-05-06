@@ -3,13 +3,13 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<ESC>", "<CMD>noh<CR>", { desc = "Remove highlight" })
 
 -- Delete, copy, cut, & paste
-vim.keymap.set({ "n", "x", } , "x", '"_x', { noremap = true,   desc = "Delete without copy", })
-vim.keymap.set("n", "<leader>p", '"0p', { noremap = true,      desc = "Paste from last yank", })
-vim.keymap.set("i", "<C-Del>", "<C-o>de", { noremap = true,    desc = "Delete word", })
+vim.keymap.set({ "n", "x", } , "x", '"_x', { noremap = true, desc = "Delete without copy", })
+vim.keymap.set("n", "<leader>p", '"0p', { noremap = true,    desc = "Paste from last yank", })
+vim.keymap.set("i", "<C-Del>", "<C-o>de", { noremap = true,  desc = "Delete word", })
 
     -- Need both of these for terminal cross-compatibility
-vim.keymap.set("i", "<C-BS>", "<C-w>", { noremap = true,       desc = "Backspace word", })
-vim.keymap.set("i", "<C-H>", "<C-w>", { noremap = true,        desc = "Backspace word", })
+vim.keymap.set("i", "<C-BS>", "<C-w>", { noremap = true, desc = "Backspace word", })
+vim.keymap.set("i", "<C-H>", "<C-w>", { noremap = true,  desc = "Backspace word", })
 
 -- Buffers
 vim.keymap.set("n", "<leader>l", "<CMD>bn<CR>",       { desc = "Next buffer" })
@@ -74,33 +74,21 @@ vim.keymap.set(
 
 -- Plugins --
 
-vim.keymap.set("n", "<leader>j", "<CMD>TSJToggle<CR>", { desc = "Toggle Treesitter join" })
+vim.keymap.set("n", "<leader>j", require("treesj").toggle, { desc = "Toggle Treesitter join" })
 
 -- Mini.nvim
-vim.keymap.set("n", "<leader>/", "gcc", { remap = true,              desc = "Toggle line comment", })
-vim.keymap.set("v", "<leader>/", "<ESC><CMD>norm gvgc<CR>",        { desc = "Toggle block comment" })
-vim.keymap.set("n", "<leader>fe", "<CMD>lua MiniFiles.open()<CR>", { desc = "File explorer" })
+vim.keymap.set("n", "<leader>/", "gcc", { remap = true,       desc = "Toggle line comment", })
+vim.keymap.set("v", "<leader>/", "<ESC><CMD>norm gvgc<CR>", { desc = "Toggle block comment" })
+vim.keymap.set("n", "<leader>fe", MiniFiles.open,           { desc = "File explorer" })
 
 -- Telescope
 local telescope_builtin = require("telescope.builtin")
-vim.keymap.set(
-    "n", "<leader>g", function() telescope_builtin.live_grep() end,
-    { desc = "Live grep" }
-)
-vim.keymap.set(
-    "n", "<leader>ff", function() telescope_builtin.find_files() end,
-    { desc = "Find files" }
-)
-vim.keymap.set(
-    "n", "<leader>fb", function() telescope_builtin.find_files() end,
-    { desc = "Find buffers" }
-)
-vim.keymap.set(
-    "n", "<C-p>", function() telescope_builtin.git_files() end,
-    { desc = "Find Git files" }
-)
+vim.keymap.set("n", "<leader>g", telescope_builtin.live_grep,   { desc = "Live grep" })
+vim.keymap.set("n", "<leader>ff", telescope_builtin.find_files, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fb", telescope_builtin.buffers,    { desc = "Find buffers" })
+vim.keymap.set("n", "<C-p>", telescope_builtin.git_files,       { desc = "Find Git files" })
 vim.keymap.set(
     "n", "<leader>fs",
-    function() telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") }) end,
+    function() telescope_builtin.grep_string { search = vim.fn.input("Grep > ") } end,
     { desc = "Find String" }
 )

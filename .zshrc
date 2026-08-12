@@ -13,6 +13,9 @@ compinit
 export EDITOR='flatpak run --filesystem=host io.neovim.nvim'
 export VISUAL="$EDITOR"
 
+# necessary for tab completion with aliases
+setopt complete_aliases
+
 bindkey "^[[H"    beginning-of-line
 bindkey "^[[F"    end-of-line
 bindkey "^[[3~"   delete-char
@@ -35,8 +38,8 @@ bindkey "^[[B" down-line-or-beginning-search
 
 eval "$(starship init zsh)"
 
-source "$HOME/gitrepos/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$HOME/gitrepos/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOME/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOME/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 #-------------------------------------
 # setup for FISH-like abbreviations
@@ -44,34 +47,34 @@ source "$HOME/gitrepos/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 #-------------------------------------
 
 # declare a list of expandable abbreviations to fill up later
-typeset -A abbrs
-abbrs=()
+typeset -A abbrevs
+abbrevs=()
 
 # add an abbreviation to the list
-function abbr() {
+function abbrev() {
     local key="${1%%\=*}" # '%%\=*' removes the equals sign and everything after it
     local val="${1#*\=}"  # '#*\=' removes the equals sign and everything before it
-    abbrs[$key]="$val"
+    abbrevs[$key]="$val"
 }
 
-# expand any abbreviation in the current line buffer
-function expand-abbreviations() {
-    for key in "${(@k)abbrs}"; do
+# expand the abbreviation that's right before the cursor
+function expand-abbreviation() {
+    for key in "${(@k)abbrevs}"; do
         # LBUFFER is "left buffer" not "line buffer"
         [[ "$LBUFFER" != "$key" && "$LBUFFER" != *" $key" ]] && continue
 
         local before="${LBUFFER%$key}"
-        local after="${abbrs[$key]}"  # this is where the actual substitution is done
+        local after="${abbrevs[$key]}" # where the actual substitution is done
         LBUFFER="${before}${after}"
         break
     done
     zle magic-space
 }
 # make the function into a widget so bindkey can use it
-zle -N expand-abbreviations
+zle -N expand-abbreviation
 
-# bind the space key to expand-abbreviations(), unless during a search
-bindkey ' '            expand-abbreviations
+# bind the space key to expand-abbreviation(), unless during a search
+bindkey ' '            expand-abbreviation
 bindkey -M isearch ' ' magic-space
 
 # ctrl+space to bypass completion
@@ -81,43 +84,32 @@ bindkey '^ ' magic-space
 # end of abbreviation setup
 #-------------------------------------
 
-function zcc() {
-    zig cc -std=c99 \
-    -Wall -Wextra -Wpedantic -Wno-char-subscripts -fno-digraphs \
-    "$@"
-}
-function zcpp() {
-    zig c++ -std=c++23 \
-    -Wall -Wextra -Wpedantic -Wno-char-subscripts -Wold-style-cast -fno-digraphs \
-    "$@"
-}
-function gccw() { gcc -std=c99 -Wall -Wextra -Wpedantic -Wno-char-subscripts "$@"; }
-function gcpp() {
-    g++ -std=c++23 \
-    -Wall -Wextra -Wpedantic -Wold-style-cast -Wno-char-subscripts \
-    "$@";
-}
+bindkey '^e' _expand_alias
 
-alias eza='eza --icons'
+alias zcc='zig cc -std=c99 -Wall -Wextra -Wpedantic -Wno-char-subscripts'
+alias zcpp='zig c++ -std=c++23 -Wall -Wextra -Wpedantic -Wno-char-subscripts -Wold-style-cast'
+alias gccw='gcc -std=c99 -Wall -Wextra -Wpedantic -Wno-char-subscripts'
+alias gcpp='g++ -std=c++23 -Wall -Wextra -Wpedantic -Wold-style-cast -Wno-char-subscripts'
+
 alias nvim='flatpak run --filesystem=host io.neovim.nvim'
 
-abbr mv='mv -i'
-abbr df='df -h'
-abbr ezaa='eza -a'
-abbr ezal='eza -l'
-abbr grep='grep -i'
-abbr hist='fc -l'
-abbr history='fc -l'
-abbr lsa='ls -a'
-abbr mkdir='mkdir -p'
-abbr nv='nvim'
-abbr sudo='doas'
-abbr uname='uname -nor'
-abbr ..='cd ..'
-abbr ...='cd ../..'
+abbrev mv='mv -i'
+abbrev df='df -h'
+abbrev ezaa='eza -a'
+abbrev ezal='eza -l'
+abbrev grep='grep -i'
+abbrev rg='rg -S'
+abbrev hist='fc -l'
+abbrev lsa='ls -a'
+abbrev mkdir='mkdir -p'
+abbrev nv='nvim'
+abbrev sudo='doas'
+abbrev uname='uname -nor'
+abbrev ..='cd ..'
+abbrev ...='cd ../..'
 
 # usage: runc <file.c> <compiler> <flags>
-function runc () {
+function runc() {
     local file="${1%.*}"
     "${@:2}" "$1" -o "$file" && ./"$file"
 }

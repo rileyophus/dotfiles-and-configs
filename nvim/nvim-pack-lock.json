@@ -4,10 +4,6 @@
       "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
       "src": "https://github.com/catppuccin/nvim.git"
     },
-    "csvcols": {
-      "rev": "0fb790bbbc301dc477792df2308ec483ae9727cd",
-      "src": "https://github.com/thgrass/csvcols.nvim.git"
-    },
     "ibl": {
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim.git"

@@ -49,7 +49,7 @@ require("nvim-treesitter").setup()
 vim.api.nvim_create_augroup("start_treesitter", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "start_treesitter",
-    pattern = { "c", "cpp", "java", "typst", "zig", },
+    pattern = { "c", "cpp", "java", "typst", "rust", "zig", },
     callback = function() vim.treesitter.start() end,
 })
 

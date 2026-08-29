@@ -1,5 +1,5 @@
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.zsh_history
+HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 # End of lines configured by zsh-newuser-install
@@ -10,8 +10,11 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-export EDITOR='flatpak run --filesystem=host io.neovim.nvim'
-export VISUAL="$EDITOR"
+export EDITOR="nvim"
+export VISUAL="nvim -R"
+
+# e.g. `riley@riley-pc ~/.local/share [127] `
+export PROMPT="%B%F{green}%n@%m%f %F{blue}%3~%f%F{red}%(?.. [%?])%f%b "
 
 # necessary for tab completion with aliases
 setopt complete_aliases
@@ -25,9 +28,6 @@ bindkey "^H"      backward-kill-word
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-# should be the default, but setting this again fixes a bug when exiting vi mode
-bindkey "^?" backward-delete-char
-
 # autocomplete from history
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -35,11 +35,6 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
-
-eval "$(starship init zsh)"
-
-source "$HOME/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$HOME/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 #-------------------------------------
 # setup for FISH-like abbreviations
@@ -89,22 +84,17 @@ bindkey '^e' _expand_alias
 alias zcc='zig cc -std=c99 -Wall -Wextra -Wpedantic -Wno-char-subscripts'
 alias zcpp='zig c++ -std=c++23 -Wall -Wextra -Wpedantic -Wno-char-subscripts -Wold-style-cast'
 alias gccw='gcc -std=c99 -Wall -Wextra -Wpedantic -Wno-char-subscripts'
-alias gcpp='g++ -std=c++23 -Wall -Wextra -Wpedantic -Wold-style-cast -Wno-char-subscripts'
+alias gcpp='g++ -std=c++23 -Wall -Wextra -Wpedantic -Wno-char-subscripts -Wold-style-cast'
 
-alias nvim='flatpak run --filesystem=host io.neovim.nvim'
+alias ls='ls --color'
 
-abbrev mv='mv -i'
-abbrev df='df -h'
-abbrev ezaa='eza -a'
-abbrev ezal='eza -l'
-abbrev grep='grep -i'
-abbrev rg='rg -S'
-abbrev hist='fc -l'
+abbrev fpi='flatpak install --user'
 abbrev lsa='ls -a'
-abbrev mkdir='mkdir -p'
+abbrev lsl='ls -l'
 abbrev nv='nvim'
-abbrev sudo='doas'
 abbrev uname='uname -nor'
+abbrev xi='xbps-install'
+abbrev xq='xbps-query'
 abbrev ..='cd ..'
 abbrev ...='cd ../..'
 
@@ -112,6 +102,10 @@ abbrev ...='cd ../..'
 function runc() {
     local file="${1%.*}"
     "${@:2}" "$1" -o "$file" && ./"$file"
+}
+
+function run-disown() {
+    setsid "${@}" < /dev/null > /dev/null 2>&1 & disown
 }
 
 # Generated for envman. Do not edit.

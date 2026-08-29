@@ -19,13 +19,11 @@ local items = {
         action = function() vim.cmd("Lazy") end,
         section = "Plugins",
     },
-
     {
         name = "Update plugins",
         action = function() vim.cmd("Lazy update") end,
         section = "Plugins",
     },
-    
     {
         name = "Sync plugins",
         action = function() vim.cmd("Lazy sync") end,

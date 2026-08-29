@@ -1,6 +1,3 @@
--- Necessary for the flatpak version
-vim.env.PATH = vim.env.PATH .. ":/run/host/usr/bin"
-
 require("vim-pack")
 require("keymaps")
 vim.cmd("syntax enable")
@@ -17,13 +14,19 @@ vim.opt.colorcolumn = { 81, 101 }
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.opt.autoindent = true
+vim.opt.smartindent = false
 
 vim.api.nvim_create_augroup("set_indent", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "set_indent",
     pattern = { "html", "css", "typst", },
     command = "setlocal tabstop=2 shiftwidth=2",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "jsonc",
+    callback = function() vim.bo.commentstring = "// %s" end
 })
 
 -- Behavior settings

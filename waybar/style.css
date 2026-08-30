@@ -1,0 +1,86 @@
+@import "catppuccin-mocha.css";
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: @base;
+    color: @text;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: none;
+    transition: none;
+}
+
+#workspaces button {
+    padding: 0 4px;
+    color: @text;
+}
+
+#workspaces button.focused, #workspaces button.active {
+    border-radius: 0;
+    background-color: @surface0;
+    color: @mauve;
+}
+
+#clock,
+#network,
+#pulseaudio,
+#tray,
+#scratchpad {
+    padding: 0 10px;
+    background-color: @surface0;
+    color: @text;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+    color: @blue;
+}
+
+#network {
+    color: @lavender;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+#pulseaudio {
+    color: @mauve;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @surface0;
+}
+
+#scratchpad {
+    background: @surface0
+}

@@ -13,20 +13,26 @@ compinit
 export EDITOR="nvim"
 export VISUAL="nvim -R"
 
-# e.g. `riley@riley-pc ~/.local/share [127] `
-export PROMPT="%B%F{green}%n@%m%f %F{blue}%3~%f%F{red}%(?.. [%?])%f%b "
+. "$HOME/.config/git-prompt.sh"
+setopt PROMPT_SUBST
+export PROMPT='\
+%B%F{green}%n@%m%f\
+ %F{blue}%3~%f\
+%F{cyan}$(__git_ps1 " (%s)")%f\
+%F{red}%(?.. [%?])%f%b \
+'
 
 # necessary for tab completion with aliases
 setopt complete_aliases
 
-bindkey "^[[H"    beginning-of-line
-bindkey "^[[F"    end-of-line
-bindkey "^[[3~"   delete-char
-bindkey "^[[3;5~" kill-word
-bindkey "^[[3;6~" kill-line
-bindkey "^H"      backward-kill-word
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
+bindkey "^[[H"    beginning-of-line  # home
+bindkey "^[[F"    end-of-line        # end
+bindkey "^[[3~"   delete-char        # del
+bindkey "^[[3;5~" kill-word          # ctrl+del
+bindkey "^[[3;6~" kill-line          # ctrl+shift+del
+bindkey "^H"      backward-kill-word # ctrl+backspace
+bindkey "^[[1;5C" forward-word       # ctrl+right
+bindkey "^[[1;5D" backward-word      # ctrl+left
 
 # autocomplete from history
 autoload -U up-line-or-beginning-search
@@ -107,6 +113,3 @@ function runc() {
 function run-disown() {
     setsid "${@}" < /dev/null > /dev/null 2>&1 & disown
 }
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
